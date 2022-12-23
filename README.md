@@ -2,7 +2,7 @@
 
 ## 概要信息
 
-基于netty实现的rpc框架，兼容Spring。
+基于netty实现的rpc框架，兼容Spring Boot。
 
 ## 指南
 
