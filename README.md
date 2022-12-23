@@ -47,7 +47,7 @@ public class User implements Serializable {
 }
 ```
 
-> 说明：DTO对象必须要实现**Serializable**接口。
+> 说明：DTO对象必须要实现***Serializable***接口。
 
 ### 设计服务接口类
 
