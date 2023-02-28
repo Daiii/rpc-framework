@@ -6,7 +6,6 @@ import cn.zhangbo.frameworke.rpc.kernel.factory.ProxyFactoryBean;
 import cn.zhangbo.frameworke.rpc.kernel.scanner.ClassScanner;
 import cn.zhangbo.frameworke.rpc.registry.RegistryService;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
@@ -26,10 +25,11 @@ import org.springframework.core.type.AnnotationMetadata;
 import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ComponentRegistrar extends ConfigurationClassPostProcessor implements ApplicationContextAware {
 

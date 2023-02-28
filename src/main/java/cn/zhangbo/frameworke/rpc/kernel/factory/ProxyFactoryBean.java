@@ -11,7 +11,7 @@ public class ProxyFactoryBean<T> implements FactoryBean<T> {
     @Autowired
     private ServiceProxy proxy;
 
-    private Class<?> interfaceClass;
+    private final Class<?> interfaceClass;
 
     public ProxyFactoryBean(Class<T> interfaceClass) {
         this.interfaceClass = interfaceClass;

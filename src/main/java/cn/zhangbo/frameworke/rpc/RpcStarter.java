@@ -21,7 +21,6 @@ public class RpcStarter {
 
     @Bean
     public NettyServer nettyServer(RpcConfig config) {
-
         return new NettyServer("127.0.0.1", config.getServerPort());
     }
 

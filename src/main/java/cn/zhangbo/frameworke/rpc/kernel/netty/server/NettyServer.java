@@ -25,11 +25,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class NettyServer implements InitializingBean, ApplicationContextAware {
 
-    private String hostname;
+    private final String hostname;
 
-    private int port;
+    private final int port;
 
-    private Map<String, Object> rpcService = new ConcurrentHashMap<>();
+    private final Map<String, Object> services = new ConcurrentHashMap<>();
 
     public NettyServer(String hostname, int port) {
         this.hostname = hostname;
@@ -49,7 +49,7 @@ public class NettyServer implements InitializingBean, ApplicationContextAware {
                         pipeline.addLast(new IdleStateHandler(0, 0, 60));
                         pipeline.addLast("decoder", new ObjectDecoder(ClassResolvers.weakCachingConcurrentResolver(this.getClass().getClassLoader())));
                         pipeline.addLast("encoder", new ObjectEncoder());
-                        pipeline.addLast("handler", new NettyServerHandler(new DispatcherHandler(new RequestHandler(rpcService))));
+                        pipeline.addLast("handler", new NettyServerHandler(new DispatcherHandler(new RequestHandler(services))));
                     }
                 }).channel(NioServerSocketChannel.class);
                 ChannelFuture future = bootstrap.bind(hostname, port).sync();
@@ -75,7 +75,7 @@ public class NettyServer implements InitializingBean, ApplicationContextAware {
             Object bean = entry.getValue();
             Class<?>[] interfaces = bean.getClass().getInterfaces();
             for (Class<?> inter : interfaces) {
-                rpcService.put(inter.getName(), bean);
+                this.services.put(inter.getName(), bean);
             }
         }
     }
